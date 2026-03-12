@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioética Cristã - Estudo Avançado</title>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Times New Roman', serif; }
+        body { background-color: #fff; color: #1a1a1a; line-height: 1.6; font-size: 16px; }
+
+        .topo-estudo {
+            position: sticky; top: 0; background: #fff; display: flex;
+            justify-content: center; gap: 15px; padding: 10px;
+            border-bottom: 2px solid #004e89; z-index: 1000;
+        }
+
+        .btn-audio {
+            padding: 8px 15px; border: none; background: #004e89;
+            border-radius: 4px; color: white; cursor: pointer; font-weight: bold; font-size: 14px;
+        }
+
+        .container { max-width: 850px; margin: 0 auto; padding: 30px 20px; }
+
+        h1 { color: #800000; font-size: 1.4rem; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #800000; padding-bottom: 10px; }
+        h2 { color: #004e89; font-size: 1.2rem; margin: 35px 0 10px 0; border-left: 4px solid #004e89; padding-left: 10px; }
+
+        .box-interativa {
+            background: #fdf2f2; border: 1px solid #800000;
+            padding: 20px; border-radius: 4px; margin: 25px 0;
+        }
+
+        p { margin-bottom: 20px; text-align: justify; text-indent: 35px; }
+        
+        .ref-biblica { color: #800000; font-weight: bold; text-decoration: none; border-bottom: 1px dotted #800000; }
+        .link-wiki { color: #004e89; font-weight: bold; text-decoration: underline; cursor: pointer; }
+
+        .btn-voltar {
+            display: inline-block; margin-top: 40px; padding: 12px 25px;
+            background: #f4f4f4; color: #004e89; text-decoration: none;
+            border-radius: 4px; font-weight: bold; border: 1px solid #004e89;
+        }
+
+        footer { text-align: center; padding: 40px; border-top: 1px solid #eee; margin-top: 50px; font-size: 0.85rem; }
+        .slogan { display: block; margin: 5px auto; font-style: italic; color: #004e89; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+    </div>
+
+    <div class="topo-estudo">
+        <button class="btn-audio" onclick="falar()">▶ OUVIR AULA MAGNA</button>
+        <button class="btn-audio" onclick="parar()">⏹ PARAR</button>
+    </div>
+
+    <div class="container">
+        <h1>BIOÉTICA CRISTÃ: FUNDAMENTOS, ONTOLOGIA E DILEMAS</h1>
+
+        <h2>I. A Ontologia do Ser e a Santidade da Vida</h2>
+        <p>A Bioética sob uma cosmovisão bíblica fundamenta-se na premissa de que a vida humana possui um valor intrínseco e sagrado, derivado da <em>Imago Dei</em>. Ao contrário das correntes utilitaristas que atribuem valor à vida com base na funcionalidade ou consciência, a teologia afirma que a dignidade reside na ontologia do ser criado por Deus (<a href="https://www.bibliaonline.com.br/acf/gn/1/27" target="_blank" class="ref-biblica">Gênesis 1:27</a>). Portanto, a vida humana não é uma propriedade privada, mas um depósito divino sobre o qual o homem exerce mordomia, e não soberania absoluta.</p>
+
+        <div class="box-interativa">
+            <strong>Definição Técnica:</strong><br><br>
+            A <span class="link-wiki" onclick="window.open('https://pt.wikipedia.org/wiki/Bio%C3%A9tica')">Bioética (Wikipédia)</span> é o estudo transdisciplinar entre biologia, medicina, filosofia e direito que investiga as condições necessárias para uma administração responsável da vida humana e animal. Na esfera teológica, ela expande-se para analisar como as intervenções biotecnológicas afetam a essência do que significa ser humano diante do Criador.
+        </div>
+
+        <h2>II. O Avanço Biotecnológico e a Ética da Manipulação</h2>
+        <p>Vivemos em uma era de possibilidades técnicas sem precedentes, onde a engenharia genética e a inteligência artificial desafiam as fronteiras da natureza. O dilema bioético surge quando a técnica deixa de ser terapêutica (curar o que está corrompido) e passa a ser eugênica (projetar o que se deseja). A "viagem" analítica aqui nos leva a questionar: até que ponto o homem pode editar o código genético (CRISPR) sem desfigurar o projeto divino? O transumanismo propõe a superação da morte via tecnologia, mas a teologia recorda que a finitude é parte da condição caída e que a verdadeira imortalidade não é técnica, mas escatológica.</p>
+
+        <h2>III. Tanatologia e os Limites do Cuidado</h2>
+        <p>As questões de fim de vida — eutanásia, suicídio assistido e distanásia — exigem uma análise profunda sobre o sofrimento e a soberania divina. A Bioética Cristã rejeita a eutanásia por considerá-la uma usurpação do domínio de Deus sobre o fôlego vital (<a href="https://www.bibliaonline.com.br/acf/jo/14/5" target="_blank" class="ref-biblica">Jó 14:5</a>). Todavia, ela também se opõe à distanásia, o prolongamento obstinado e fútil da agonia por meios artificiais, reconhecendo que a morte, embora seja um inimigo, é a porta para a eternidade. O equilíbrio ético reside no cuidado paliativo, que preserva a dignidade do paciente sem tentar "vencer" a Deus no controle do tempo final.</p>
+
+        <h2>IV. Ética Reprodutiva e a Dignidade do Embrião</h2>
+        <p>A manipulação da vida em seu estágio inicial — fertilização <em>in vitro</em>, seleção embrionária e pesquisas com células-tronco — coloca o teólogo diante da necessidade de definir o <em>status</em> moral do embrião. Se a vida começa na concepção (<a href="https://www.bibliaonline.com.br/acf/jr/1/5" target="_blank" class="ref-biblica">Jeremias 1:5</a>), o embrião não pode ser tratado como mero material de laboratório. A justiça bioética exige que a ciência avance sem sacrificar os vulneráveis. A responsabilidade do cristão é atuar como voz profética em um mundo que tende a transformar a vida em mercadoria, defendendo a justiça social no acesso à saúde e o respeito incondicional à biologia humana como território sagrado.</p>
+
+        <a href="1.html" class="btn-voltar">⬅ VOLTAR AO CATÁLOGO</a>
+    </div>
+
+    <footer>
+        <strong>Gilberto Moreira</strong><br>
+        Faculdade Teológica AVANCE
+        <span class="slogan">"Ultrapassando limites!"</span>
+        Seminário HAZAQ<br><br>
+        Válido conforme Lei 9.394/96, Decreto 5.154/04 e Deliberação CEE 14/97.
+    </footer>
+
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+        let sintetizador = window.speechSynthesis;
+        function falar() {
+            sintetizador.cancel();
+            let texto = document.querySelector('.container').innerText;
+            let msg = new SpeechSynthesisUtterance(texto);
+            msg.lang = 'pt-BR';
+            msg.rate = 1.0;
+            sintetizador.speak(msg);
+        }
+        function parar() { sintetizador.cancel(); }
+    </script>
+</body>
+</html>

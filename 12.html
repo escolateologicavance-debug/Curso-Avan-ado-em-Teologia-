@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Teológica Final - AVANCE</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root { --primary: #004e89; --secondary: #800000; --gold: #c5a059; --bg: #f4f7f9; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg); padding: 10px; }
+        
+        .container { width: 100%; max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        .header-avaliacao { text-align: center; border-bottom: 3px solid var(--secondary); margin-bottom: 20px; padding-bottom: 15px; }
+        .header-avaliacao h1 { color: var(--primary); font-size: 1.4rem; text-transform: uppercase; }
+        .slogan { font-style: italic; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
+
+        .info-prova { display: flex; flex-direction: column; gap: 5px; background: #eee; padding: 10px; border-radius: 5px; font-size: 0.85rem; text-align: center; margin-bottom: 15px; }
+
+        #timer { font-size: 1.3rem; font-weight: bold; color: var(--secondary); text-align: center; margin-bottom: 20px; padding: 10px; border: 2px solid var(--secondary); border-radius: 5px; background: #fff; }
+
+        .form-dados { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
+        input { width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; outline: none; }
+
+        .questao { margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 8px; background: #fff; border-left: 5px solid var(--primary); }
+        .questao p { font-weight: bold; margin-bottom: 12px; font-size: 1rem; color: #111; line-height: 1.4; }
+        
+        label { display: block; margin-bottom: 8px; padding: 12px; border-radius: 5px; border: 1px solid #ddd; font-size: 0.95rem; cursor: pointer; }
+        label:active { background: #eef4f8; }
+
+        .btn-acao { width: 100%; padding: 18px; border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        #btn-finalizar { background: var(--secondary); color: white; }
+        #btn-pdf { background: var(--primary); color: white; display: none; }
+
+        #certificado-area { display: none; width: 850px; padding: 40px; background: white; border: 20px solid var(--primary); margin: 0 auto; }
+        .cert-inner { border: 5px double var(--gold); padding: 40px; text-align: center; }
+
+        @media (min-width: 600px) {
+            .header-avaliacao h1 { font-size: 1.8rem; }
+            .info-prova { flex-direction: row; justify-content: space-around; }
+            .form-dados { flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-avaliacao">
+        <h1>Escola Teológica AVANCE</h1>
+        <div class="slogan">"Ultrapassando limites!"</div>
+        <p>Seminário HAZAQ</p>
+    </div>
+
+    <div class="info-prova">
+        <span><strong>Critério:</strong> Média 7.0 (Mínimo 7 acertos)</span>
+        <span><strong>Tempo:</strong> 30:00 Minutos</span>
+    </div>
+
+    <div id="timer">Iniciando...</div>
+
+    <div class="form-dados">
+        <input type="text" id="aluno-nome" placeholder="Nome Completo">
+        <input type="text" id="aluno-cpf" placeholder="CPF (Apenas números)">
+    </div>
+
+    <form id="quiz-form">
+        <div class="questao" data-resp="B">
+            <p>1. (Bibliologia) Qual termo define que a Bíblia é a autoridade final e suficiente?</p>
+            <label><input type="radio" name="q1" value="A"> Inerrância</label>
+            <label><input type="radio" name="q1" value="B"> Sola Scriptura</label>
+            <label><input type="radio" name="q1" value="C"> Inspiração Parcial</label>
+        </div>
+
+        <div class="questao" data-resp="A">
+            <p>2. (Cristologia) A união hipostática de Cristo defende:</p>
+            <label><input type="radio" name="q2" value="A"> 100% Homem e 100% Deus em uma só pessoa.</label>
+            <label><input type="radio" name="q2" value="B"> Que Ele deixou de ser Deus enquanto estava na Terra.</label>
+            <label><input type="radio" name="q2" value="C"> Que Sua natureza humana era apenas uma ilusão.</label>
+        </div>
+
+        <div class="questao" data-resp="C">
+            <p>3. (Hermenêutica) O que busca a Exegese em um texto bíblico?</p>
+            <label><input type="radio" name="q3" value="A"> Colocar o pensamento do leitor dentro do texto.</label>
+            <label><input type="radio" name="q3" value="B"> Ignorar o contexto histórico para focar no misticismo.</label>
+            <label><input type="radio" name="q3" value="C"> Extrair o sentido original pretendido pelo autor.</label>
+        </div>
+
+        <div class="questao" data-resp="B">
+            <p>4. (Homilética) Qual o elemento do sermão que serve para "iluminar" a tese através de uma história?</p>
+            <label><input type="radio" name="q4" value="A"> Exórdio</label>
+            <label><input type="radio" name="q4" value="B"> Ilustração</label>
+            <label><input type="radio" name="q4" value="C"> Peroração</label>
+        </div>
+
+        <div class="questao" data-resp="A">
+            <p>5. (História) Quem foi o reformador que fixou as 95 teses em Wittenberg?</p>
+            <label><input type="radio" name="q5" value="A"> Martinho Lutero</label>
+            <label><input type="radio" name="q5" value="B"> João Calvino</label>
+            <label><input type="radio" name="q5" value="C"> Policarpo de Esmirna</label>
+        </div>
+
+        <div class="questao" data-resp="C">
+            <p>6. (Bioética) Qual o fundamento bíblico para a dignidade inalienável da vida humana?</p>
+            <label><input type="radio" name="q6" value="A"> Autonomia progressiva</label>
+            <label><input type="radio" name="q6" value="B"> Evolucionismo Teísta</label>
+            <label><input type="radio" name="q6" value="C"> Imago Dei (Imagem de Deus)</label>
+        </div>
+
+        <div class="questao" data-resp="B">
+            <p>7. (Conflitos) Segundo a 'Engenharia do Perdão', o perdão é:</p>
+            <label><input type="radio" name="q7" value="A"> Um sentimento que surge após o pedido de desculpas.</label>
+            <label><input type="radio" name="q7" value="B"> Uma decisão forense da vontade de não reter a dívida.</label>
+            <label><input type="radio" name="q7" value="C"> Esquecimento total do fato ocorrido.</label>
+        </div>
+
+        <div class="questao" data-resp="A">
+            <p>8. (Heresiologia) Qual seita afirma que Jesus é 'um deus' (criado) e não o Deus Todo-Poderoso?</p>
+            <label><input type="radio" name="q8" value="A"> Testemunhas de Jeová</label>
+            <label><input type="radio" name="q8" value="B"> Adventistas do Sétimo Dia</label>
+            <label><input type="radio" name="q8" value="C"> Congregação Cristã no Brasil</label>
+        </div>
+
+        <div class="questao" data-resp="C">
+            <p>9. (A.T.) Qual aliança bíblica prometeu que um descendente de Davi reinaria para sempre?</p>
+            <label><input type="radio" name="q9" value="A"> Aliança Noética</label>
+            <label><input type="radio" name="q9" value="B"> Aliança Mosaica</label>
+            <label><input type="radio" name="q9" value="C"> Aliança Davídica</label>
+        </div>
+
+        <div class="questao" data-resp="B">
+            <p>10. (Ontologia) O conceito 'Ex-Nihilo' significa que Deus criou o universo:</p>
+            <label><input type="radio" name="q10" value="A"> A partir de uma matéria pré-existente.</label>
+            <label><input type="radio" name="q10" value="B"> A partir do nada, por Sua palavra.</label>
+            <label><input type="radio" name="q10" value="C"> Como uma emanação de Sua própria substância.</label>
+        </div>
+
+        <button type="button" id="btn-finalizar" class="btn-acao" onclick="corrigir()">FINALIZAR AVALIAÇÃO</button>
+        <button type="button" id="btn-pdf" class="btn-acao" onclick="gerarPDF()">GERAR MEU CERTIFICADO (PDF)</button>
+    </form>
+</div>
+
+<div id="certificado-area">
+    <div class="cert-inner">
+        <h2 style="color:var(--primary); font-size: 35px; font-family: 'Times New Roman';">Escola Teológica AVANCE</h2>
+        <p style="font-style: italic; color:var(--primary); margin-bottom: 20px;">"Ultrapassando limites!" - Seminário HAZAQ</p>
+        <h1 style="color:var(--secondary); font-size: 55px; letter-spacing: 5px; margin: 20px 0;">CERTIFICADO</h1>
+        <p style="font-size: 22px;">Certificamos para os devidos fins que o(a) aluno(a):</p>
+        <h2 id="cert-nome-txt" style="color:var(--primary); font-size: 35px; margin: 20px 0; text-decoration: underline;">NOME DO FORMADO</h2>
+        <p style="font-size: 20px; line-height: 1.6;">Concluiu com êxito o <strong>Curso Avançado em Teologia</strong>,<br>sendo aprovado em banca examinadora com nota superior à média 7.0.</p>
+        <div style="margin-top: 60px; display: flex; justify-content: space-between; padding: 0 40px;">
+            <div style="border-top: 2px solid #000; width: 250px; padding-top: 10px;"><strong>Gilberto Moreira</strong><br>Diretor Executivo</div>
+            <div id="cert-nome-cpf" style="border-top: 2px solid #000; width: 250px; padding-top: 10px;"><strong>NOME / CPF</strong><br>Bacharelando(a)</div>
+        </div>
+        <p style="font-size: 11px; margin-top: 40px; color: #555;">Válido conforme Lei 9.394/96, Decreto 5.154/04 e Deliberação CEE 14/97.</p>
+    </div>
+</div>
+
+<script>
+    let tempoRestante = localStorage.getItem('tempo_avance') ? parseInt(localStorage.getItem('tempo_avance')) : 1800;
+    const contagem = setInterval(() => {
+        tempoRestante--;
+        localStorage.setItem('tempo_avance', tempoRestante);
+        let min = Math.floor(tempoRestante / 60);
+        let seg = tempoRestante % 60;
+        document.getElementById('timer').innerText = `TEMPO RESTANTE: ${min}:${seg < 10 ? '0'+seg : seg}`;
+        if(tempoRestante <= 0) { clearInterval(contagem); corrigir(); }
+    }, 1000);
+
+    function corrigir() {
+        const nome = document.getElementById('aluno-nome').value;
+        const cpf = document.getElementById('aluno-cpf').value;
+        if(!nome || !cpf) { alert("Informe seu Nome e CPF para registro no certificado."); return; }
+
+        let acertos = 0;
+        document.querySelectorAll('.questao').forEach(q => {
+            const resp = q.querySelector('input:checked');
+            if(resp && resp.value === q.dataset.resp) acertos++;
+        });
+
+        if(acertos >= 7) {
+            alert("APROVADO! Nota: " + acertos + "/10. Gere seu certificado agora.");
+            document.getElementById('btn-finalizar').style.display = 'none';
+            document.getElementById('btn-pdf').style.display = 'block';
+            document.getElementById('cert-nome-txt').innerText = nome.toUpperCase();
+            document.getElementById('cert-nome-cpf').innerHTML = "<strong>"+nome+"</strong><br>CPF: "+cpf;
+            clearInterval(contagem);
+            localStorage.removeItem('tempo_avance');
+        } else {
+            alert("REPROVADO. Nota: " + acertos + "/10. Você precisa de 7 acertos. Estude mais!");
+            localStorage.removeItem('tempo_avance');
+            location.reload();
+        }
+    }
+
+    function gerarPDF() {
+        const element = document.getElementById('certificado-area');
+        element.style.display = 'block';
+        const opt = { margin: 0, filename: 'Certificado_Teologia_Avance.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } };
+        html2pdf().set(opt).from(element).save().then(() => element.style.display = 'none');
+    }
+</script>
+</body>
+</html>
