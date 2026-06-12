@@ -33,7 +33,8 @@
         #btn-finalizar { background: var(--secondary); color: white; }
         #btn-pdf { background: var(--primary); color: white; display: none; }
 
-        #certificado-area { display: none; width: 850px; padding: 40px; background: white; border: 20px solid var(--primary); margin: 0 auto; }
+        /* Oculto, mas acessível ao script */
+        #certificado-area { display: none; width: 850px; padding: 40px; background: white; border: 20px solid var(--primary); }
         .cert-inner { border: 5px double var(--gold); padding: 40px; text-align: center; }
 
         @media (min-width: 600px) {
@@ -140,6 +141,7 @@
     </form>
 </div>
 
+<!-- Certificado -->
 <div id="certificado-area">
     <div class="cert-inner">
         <h2 style="color:var(--primary); font-size: 35px; font-family: 'Times New Roman';">Escola Teológica AVANCE</h2>
@@ -179,11 +181,14 @@
         });
 
         if(acertos >= 7) {
-            alert("APROVADO! Nota: " + acertos + "/10. Gere seu certificado agora.");
+            alert("APROVADO! Nota: " + acertos + "/10. Clique no botão de PDF para baixar.");
             document.getElementById('btn-finalizar').style.display = 'none';
             document.getElementById('btn-pdf').style.display = 'block';
+            
+            // Preenche os dados
             document.getElementById('cert-nome-txt').innerText = nome.toUpperCase();
             document.getElementById('cert-nome-cpf').innerHTML = "<strong>"+nome+"</strong><br>CPF: "+cpf;
+            
             clearInterval(contagem);
             localStorage.removeItem('tempo_avance');
         } else {
@@ -195,9 +200,21 @@
 
     function gerarPDF() {
         const element = document.getElementById('certificado-area');
+        // Exibe o elemento antes de gerar
         element.style.display = 'block';
-        const opt = { margin: 0, filename: 'Certificado_Teologia_Avance.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } };
-        html2pdf().set(opt).from(element).save().then(() => element.style.display = 'none');
+        
+        const opt = { 
+            margin: 0, 
+            filename: 'Certificado_Teologia_Avance.pdf', 
+            image: { type: 'jpeg', quality: 0.98 }, 
+            html2canvas: { scale: 2 }, 
+            jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } 
+        };
+        
+        // Gera o PDF e oculta novamente ao finalizar
+        html2pdf().set(opt).from(element).save().then(() => {
+            element.style.display = 'none';
+        });
     }
 </script>
 </body>
