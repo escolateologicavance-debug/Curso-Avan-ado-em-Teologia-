@@ -24,8 +24,8 @@
         #btn-finalizar { background: var(--secondary); color: white; }
         #btn-pdf { background: var(--primary); color: white; display: none; }
 
-        /* Estilo do certificado corrigido */
-        #certificado-area { display: none; width: 1120px; height: 790px; padding: 20px; background: white; border: 15px solid var(--primary); box-sizing: border-box; }
+        /* Ajuste do Certificado para formato Retangular */
+        #certificado-area { display: none; width: 842px; height: 595px; padding: 30px; background: white; border: 15px solid var(--primary); box-sizing: border-box; }
         .cert-inner { border: 5px double var(--gold); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
 
         @media (min-width: 600px) {
@@ -75,24 +75,25 @@
 
 <div id="certificado-area">
     <div class="cert-inner">
-        <h2 style="color:var(--primary); font-size: 30px; font-family: 'Times New Roman';">Escola Teológica AVANCE</h2>
+        <h2 style="color:var(--primary); font-size: 28px; font-family: 'Times New Roman';">Escola Teológica AVANCE</h2>
         <p style="font-style: italic; color:var(--primary); margin-bottom: 10px;">"Ultrapassando limites!" - Seminário HAZAQ</p>
-        <h1 style="color:var(--secondary); font-size: 45px; letter-spacing: 5px; margin: 10px 0;">CERTIFICADO</h1>
-        <p style="font-size: 20px;">Certificamos para os devidos fins que o(a) aluno(a):</p>
-        <h2 id="cert-nome-txt" style="color:var(--primary); font-size: 30px; margin: 15px 0; text-decoration: underline;">NOME DO FORMADO</h2>
-        <p style="font-size: 18px; line-height: 1.4;">Concluiu com êxito o <strong>Curso Avançado em Teologia</strong>,<br>sendo aprovado em banca examinadora com nota superior à média 7.0.</p>
+        <h1 style="color:var(--secondary); font-size: 40px; letter-spacing: 5px; margin: 10px 0;">CERTIFICADO</h1>
+        <p style="font-size: 18px;">Certificamos para os devidos fins que o(a) aluno(a):</p>
+        <h2 id="cert-nome-txt" style="color:var(--primary); font-size: 26px; margin: 15px 0; text-decoration: underline;">NOME DO FORMADO</h2>
+        <p style="font-size: 16px; line-height: 1.4;">Concluiu com êxito o <strong>Curso Avançado em Teologia</strong>,<br>sendo aprovado em banca examinadora com nota superior à média 7.0.</p>
         
-        <p id="data-emissao" style="font-size: 16px; margin: 20px 0;"></p>
+        <p id="data-emissao" style="font-size: 14px; margin: 20px 0;"></p>
 
-        <div style="margin-top: 30px; display: flex; justify-content: space-around; width: 100%;">
-            <div style="border-top: 2px solid #000; width: 250px; padding-top: 5px;"><strong>Gilberto Moreira</strong><br>Diretor Executivo</div>
-            <div id="cert-nome-cpf" style="border-top: 2px solid #000; width: 250px; padding-top: 5px;"><strong>NOME / CPF</strong><br>Bacharelando(a)</div>
+        <div style="margin-top: 20px; display: flex; justify-content: space-around; width: 100%;">
+            <div style="border-top: 2px solid #000; width: 200px; padding-top: 5px; font-size: 14px;"><strong>Gilberto Moreira</strong><br>Diretor Executivo</div>
+            <div id="cert-nome-cpf" style="border-top: 2px solid #000; width: 200px; padding-top: 5px; font-size: 14px;"><strong>ALUNO</strong><br>Bacharelando(a)</div>
         </div>
-        <p style="font-size: 10px; margin-top: 20px; color: #555;">Válido conforme Lei 9.394/96, Decreto 5.154/04 e Deliberação CEE 14/97.</p>
+        <p style="font-size: 9px; margin-top: 15px; color: #555;">Válido conforme Lei 9.394/96, Decreto 5.154/04 e Deliberação CEE 14/97.</p>
     </div>
 </div>
 
 <script>
+    // Timer e Lógica de correção mantidos
     let tempoRestante = localStorage.getItem('tempo_avance') ? parseInt(localStorage.getItem('tempo_avance')) : 1800;
     const contagem = setInterval(() => {
         tempoRestante--;
@@ -128,39 +129,22 @@
         }
     }
 
-        function gerarPDF() {
+    function gerarPDF() {
         const element = document.getElementById('certificado-area');
-        const principal = document.getElementById('conteudo-principal');
-        
-        // Força a exibição para captura
         element.style.display = 'block';
-        principal.style.display = 'none';
         
         const opt = { 
-            margin: 0, // Margem zero para ocupar toda a folha
+            margin: 0,
             filename: 'Certificado_Teologia_Avance.pdf', 
             image: { type: 'jpeg', quality: 1 }, 
-            html2canvas: { 
-                scale: 2,
-                useCORS: true,
-                letterRendering: true,
-                allowTaint: true
-            }, 
-            jsPDF: { 
-                unit: 'px', 
-                format: [850, 650], 
-                orientation: 'landscape',
-                // O segredo está aqui: forçar o PDF a não adicionar margens extras
-                putOnlyUsedFonts: true
-            } 
+            html2canvas: { scale: 2, useCORS: true }, 
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
         };
         
         html2pdf().set(opt).from(element).save().then(() => {
             element.style.display = 'none';
-            principal.style.display = 'block';
         });
     }
-
 </script>
 </body>
 </html>
