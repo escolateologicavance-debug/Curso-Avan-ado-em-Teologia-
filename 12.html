@@ -9,7 +9,6 @@
         :root { --primary: #004e89; --secondary: #800000; --gold: #c5a059; --bg: #f4f7f9; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--bg); padding: 10px; }
-        
         .container { width: 100%; max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .header-avaliacao { text-align: center; border-bottom: 3px solid var(--secondary); margin-bottom: 20px; padding-bottom: 15px; }
         .header-avaliacao h1 { color: var(--primary); font-size: 1.4rem; text-transform: uppercase; }
@@ -25,6 +24,7 @@
         #btn-finalizar { background: var(--secondary); color: white; }
         #btn-pdf { background: var(--primary); color: white; display: none; }
 
+        /* Estilo do certificado */
         #certificado-area { display: none; width: 850px; padding: 40px; background: white; border: 20px solid var(--primary); margin: 20px auto; }
         .cert-inner { border: 5px double var(--gold); padding: 40px; text-align: center; }
 
@@ -81,6 +81,9 @@
         <p style="font-size: 22px;">Certificamos para os devidos fins que o(a) aluno(a):</p>
         <h2 id="cert-nome-txt" style="color:var(--primary); font-size: 35px; margin: 20px 0; text-decoration: underline;">NOME DO FORMADO</h2>
         <p style="font-size: 20px; line-height: 1.6;">Concluiu com êxito o <strong>Curso Avançado em Teologia</strong>,<br>sendo aprovado em banca examinadora com nota superior à média 7.0.</p>
+        
+        <p id="data-emissao" style="font-size: 18px; margin: 30px 0;"></p>
+
         <div style="margin-top: 60px; display: flex; justify-content: space-between; padding: 0 40px;">
             <div style="border-top: 2px solid #000; width: 250px; padding-top: 10px;"><strong>Gilberto Moreira</strong><br>Diretor Executivo</div>
             <div id="cert-nome-cpf" style="border-top: 2px solid #000; width: 250px; padding-top: 10px;"><strong>NOME / CPF</strong><br>Bacharelando(a)</div>
@@ -117,6 +120,12 @@
             document.getElementById('btn-pdf').style.display = 'block';
             document.getElementById('cert-nome-txt').innerText = nome.toUpperCase();
             document.getElementById('cert-nome-cpf').innerHTML = "<strong>"+nome+"</strong><br>CPF: "+cpf;
+            
+            // Inserção da data atual
+            const data = new Date();
+            const dataFormatada = data.toLocaleDateString('pt-BR');
+            document.getElementById('data-emissao').innerText = "Data de emissão: " + dataFormatada;
+            
             clearInterval(contagem);
             localStorage.removeItem('tempo_avance');
         } else {
@@ -129,20 +138,18 @@
         const element = document.getElementById('certificado-area');
         const principal = document.getElementById('conteudo-principal');
         
-        // Exibe o certificado e esconde o questionário para garantir a captura
         element.style.display = 'block';
         principal.style.display = 'none';
         
         const opt = { 
             margin: 0, 
             filename: 'Certificado_Teologia_Avance.pdf', 
-            image: { type: 'jpeg', quality: 0.98 }, 
+            image: { type: 'jpeg', quality: 1 }, 
             html2canvas: { scale: 2 }, 
             jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } 
         };
         
         html2pdf().set(opt).from(element).save().then(() => {
-            // Restaura a visualização normal após o download
             element.style.display = 'none';
             principal.style.display = 'block';
         });
