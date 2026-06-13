@@ -2,29 +2,34 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Avaliação Teológica AVANCE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Teológica Final - AVANCE</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        :root { --primary: #004e89; --secondary: #800000; }
-        body { font-family: sans-serif; background: #f4f7f9; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; }
-        #timer { font-size: 1.5rem; font-weight: bold; color: var(--secondary); text-align: center; padding: 15px; border: 2px solid var(--secondary); margin-bottom: 20px; }
-        .info-prova { background: #eee; padding: 10px; margin-bottom: 20px; text-align: center; font-weight: bold; }
-        .questao { margin-bottom: 20px; padding: 15px; border-left: 5px solid var(--primary); background: #fff; border: 1px solid #ddd; }
-        .btn-acao { width: 100%; padding: 15px; border: none; color: white; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        :root { --primary: #004e89; --secondary: #800000; --gold: #c5a059; --bg: #f4f7f9; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); padding: 10px; }
+        .container { width: 100%; max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header-avaliacao { text-align: center; border-bottom: 3px solid var(--secondary); margin-bottom: 20px; padding-bottom: 15px; }
+        .info-prova { display: flex; justify-content: space-around; background: #eee; padding: 10px; margin-bottom: 15px; font-size: 0.9rem; }
+        #timer { font-size: 1.3rem; font-weight: bold; color: var(--secondary); text-align: center; padding: 10px; border: 2px solid var(--secondary); margin-bottom: 20px; }
+        .questao { margin-bottom: 20px; padding: 15px; border-left: 5px solid var(--primary); border: 1px solid #eee; }
+        .btn-acao { width: 100%; padding: 18px; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; color: white; }
         #btn-finalizar { background: var(--secondary); }
         #btn-pdf { background: var(--primary); display: none; }
-        /* Certificado fixo em uma página A4 paisagem */
-        #certificado-area { display: none; width: 842px; height: 595px; padding: 40px; background: white; border: 15px solid var(--primary); box-sizing: border-box; }
-        .cert-inner { border: 5px double #c5a059; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        /* Certificado */
+        #certificado-area { position: absolute; left: -9999px; width: 1120px; height: 790px; padding: 40px; background: white; border: 15px solid var(--primary); box-sizing: border-box; }
+        .cert-inner { border: 5px double var(--gold); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
     </style>
 </head>
 <body>
 
 <div class="container" id="conteudo-principal">
-    <h1>Escola Teológica AVANCE</h1>
-    <div class="info-prova">Critério: Média 7.0 (Mínimo 7 acertos)</div>
-    <div id="timer">Carregando...</div>
+    <div class="header-avaliacao">
+        <h1>Escola Teológica AVANCE</h1>
+        <p>"Ultrapassando limites!" - Seminário HAZAQ</p>
+    </div>
+    <div class="info-prova"><span>Critério: Média 7.0</span><span>Tempo: 30:00 Minutos</span></div>
+    <div id="timer">TEMPO: 30:00</div>
     <form id="quiz-form">
         <input type="text" id="aluno-nome" placeholder="Nome Completo" style="width:100%; padding:10px; margin-bottom:10px;">
         <input type="text" id="aluno-cpf" placeholder="CPF" style="width:100%; padding:10px; margin-bottom:10px;">
@@ -58,12 +63,12 @@
 
 <script>
     let tempo = 1800;
-    const cronometro = setInterval(() => {
+    const interval = setInterval(() => {
         tempo--;
         let m = Math.floor(tempo / 60);
         let s = tempo % 60;
-        document.getElementById('timer').innerText = `TEMPO RESTANTE: ${m}:${s < 10 ? '0'+s : s}`;
-        if(tempo <= 0) { clearInterval(cronometro); alert("Tempo esgotado!"); }
+        document.getElementById('timer').innerText = `TEMPO: ${m}:${s < 10 ? '0'+s : s}`;
+        if(tempo <= 0) { clearInterval(interval); alert("Tempo esgotado!"); }
     }, 1000);
 
     function corrigir() {
@@ -78,9 +83,8 @@
 
     function gerarPDF() {
         const el = document.getElementById('certificado-area');
-        el.style.display = 'block';
         const opt = { margin: 0, filename: 'Certificado.pdf', jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' } };
-        html2pdf().set(opt).from(el).save().then(() => { el.style.display = 'none'; });
+        html2pdf().set(opt).from(el).save();
     }
 </script>
 </body>
