@@ -25,7 +25,6 @@
         #btn-finalizar { background: var(--secondary); color: white; }
         #btn-pdf { background: var(--primary); color: white; display: none; }
 
-        /* Estilo do certificado oculto */
         #certificado-area { display: none; width: 850px; padding: 40px; background: white; border: 20px solid var(--primary); margin: 20px auto; }
         .cert-inner { border: 5px double var(--gold); padding: 40px; text-align: center; }
 
@@ -38,7 +37,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container" id="conteudo-principal">
     <div class="header-avaliacao">
         <h1>Escola Teológica AVANCE</h1>
         <div class="slogan">"Ultrapassando limites!"</div>
@@ -128,10 +127,24 @@
 
     function gerarPDF() {
         const element = document.getElementById('certificado-area');
-        element.style.display = 'block'; // Exibe para capturar
-        const opt = { margin: 0, filename: 'Certificado_Teologia_Avance.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } };
+        const principal = document.getElementById('conteudo-principal');
+        
+        // Exibe o certificado e esconde o questionário para garantir a captura
+        element.style.display = 'block';
+        principal.style.display = 'none';
+        
+        const opt = { 
+            margin: 0, 
+            filename: 'Certificado_Teologia_Avance.pdf', 
+            image: { type: 'jpeg', quality: 0.98 }, 
+            html2canvas: { scale: 2 }, 
+            jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } 
+        };
+        
         html2pdf().set(opt).from(element).save().then(() => {
-            element.style.display = 'none'; // Oculta de novo
+            // Restaura a visualização normal após o download
+            element.style.display = 'none';
+            principal.style.display = 'block';
         });
     }
 </script>
