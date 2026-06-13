@@ -134,26 +134,41 @@
         }
     }
 
-    function gerarPDF() {
-        const element = document.getElementById('certificado-area');
-        const principal = document.getElementById('conteudo-principal');
-        
-        element.style.display = 'block';
-        principal.style.display = 'none';
-        
-        const opt = { 
-            margin: 0, 
-            filename: 'Certificado_Teologia_Avance.pdf', 
-            image: { type: 'jpeg', quality: 1 }, 
-            html2canvas: { scale: 2 }, 
-            jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } 
-        };
-        
-        html2pdf().set(opt).from(element).save().then(() => {
-            element.style.display = 'none';
-            principal.style.display = 'block';
-        });
-    }
+  function gerarPDF() {
+    const element = document.getElementById('certificado-area');
+    const principal = document.getElementById('conteudo-principal');
+    
+    element.style.display = 'block';
+    principal.style.display = 'none';
+    
+    const opt = { 
+        margin: 0, 
+        filename: 'Certificado_Teologia_Avance.pdf', 
+        image: { type: 'jpeg', quality: 1 }, 
+        html2canvas: { 
+            scale: 2,
+            useCORS: true,
+            letterRendering: true,
+            allowTaint: true,
+            logging: false,
+            scrollY: 0,
+            scrollX: 0
+        }, 
+        jsPDF: { 
+            unit: 'px', 
+            format:, 
+            orientation: 'landscape',
+            putOnlyUsedFonts: true
+        },
+        pagebreak: { mode: 'avoid' }
+    };
+    
+    html2pdf().set(opt).from(element).save().then(() => {
+        element.style.display = 'none';
+        principal.style.display = 'block';
+    });
+}
+
 </script>
 </body>
 </html>
