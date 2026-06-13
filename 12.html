@@ -141,22 +141,13 @@
         element.style.display = 'block';
         principal.style.display = 'none';
         
-                const opt = { 
-            margin: 10, // Adicionamos uma margem de 10px para evitar o estouro
+        const opt = { 
+            margin: 0, 
             filename: 'Certificado_Teologia_Avance.pdf', 
             image: { type: 'jpeg', quality: 1 }, 
-            html2canvas: { 
-                scale: 2,
-                logging: false,
-                windowWidth: 900 // Força a largura para não quebrar
-            }, 
-            jsPDF: { 
-                unit: 'px', 
-                format: [850, 680], // Aumentamos ligeiramente a altura do formato para garantir folga
-                orientation: 'landscape' 
-            } 
+            html2canvas: { scale: 2 }, 
+            jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } 
         };
-
         
         html2pdf().set(opt).from(element).save().then(() => {
             element.style.display = 'none';
