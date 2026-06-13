@@ -11,47 +11,23 @@
         body { background-color: var(--bg); padding: 10px; }
         
         .container { width: 100%; max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        
         .header-avaliacao { text-align: center; border-bottom: 3px solid var(--secondary); margin-bottom: 20px; padding-bottom: 15px; }
         .header-avaliacao h1 { color: var(--primary); font-size: 1.4rem; text-transform: uppercase; }
         .slogan { font-style: italic; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
-
         .info-prova { display: flex; flex-direction: column; gap: 5px; background: #eee; padding: 10px; border-radius: 5px; font-size: 0.85rem; text-align: center; margin-bottom: 15px; }
-
         #timer { font-size: 1.3rem; font-weight: bold; color: var(--secondary); text-align: center; margin-bottom: 20px; padding: 10px; border: 2px solid var(--secondary); border-radius: 5px; background: #fff; }
-
         .form-dados { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
         input { width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; outline: none; }
-
         .questao { margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 8px; background: #fff; border-left: 5px solid var(--primary); }
         .questao p { font-weight: bold; margin-bottom: 12px; font-size: 1rem; color: #111; line-height: 1.4; }
-        
         label { display: block; margin-bottom: 8px; padding: 12px; border-radius: 5px; border: 1px solid #ddd; font-size: 0.95rem; cursor: pointer; }
-        label:active { background: #eef4f8; }
-
         .btn-acao { width: 100%; padding: 18px; border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
         #btn-finalizar { background: var(--secondary); color: white; }
         #btn-pdf { background: var(--primary); color: white; display: none; }
-    function gerarPDF() {
-        const element = document.getElementById('certificado-area');
-        
-        // Exibe o elemento na tela momentaneamente para o html2pdf capturar
-        element.style.display = 'block';
-        
-        const opt = { 
-            margin: 0, 
-            filename: 'Certificado_Teologia_Avance.pdf', 
-            image: { type: 'jpeg', quality: 0.98 }, 
-            html2canvas: { scale: 2 }, 
-            jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } 
-        };
-        
-        // Gera o PDF e oculta o elemento novamente após o download
-        html2pdf().set(opt).from(element).save().then(() => {
-            element.style.display = 'none';
-        });
-    }
 
+        /* Estilo do certificado oculto */
+        #certificado-area { display: none; width: 850px; padding: 40px; background: white; border: 20px solid var(--primary); margin: 20px auto; }
+        .cert-inner { border: 5px double var(--gold); padding: 40px; text-align: center; }
 
         @media (min-width: 600px) {
             .header-avaliacao h1 { font-size: 1.8rem; }
@@ -82,82 +58,22 @@
     </div>
 
     <form id="quiz-form">
-        <div class="questao" data-resp="B">
-            <p>1. (Bibliologia) Qual termo define que a Bíblia é a autoridade final e suficiente?</p>
-            <label><input type="radio" name="q1" value="A"> Inerrância</label>
-            <label><input type="radio" name="q1" value="B"> Sola Scriptura</label>
-            <label><input type="radio" name="q1" value="C"> Inspiração Parcial</label>
-        </div>
-
-        <div class="questao" data-resp="A">
-            <p>2. (Cristologia) A união hipostática de Cristo defende:</p>
-            <label><input type="radio" name="q2" value="A"> 100% Homem e 100% Deus em uma só pessoa.</label>
-            <label><input type="radio" name="q2" value="B"> Que Ele deixou de ser Deus enquanto estava na Terra.</label>
-            <label><input type="radio" name="q2" value="C"> Que Sua natureza humana era apenas uma ilusão.</label>
-        </div>
-
-        <div class="questao" data-resp="C">
-            <p>3. (Hermenêutica) O que busca a Exegese em um texto bíblico?</p>
-            <label><input type="radio" name="q3" value="A"> Colocar o pensamento do leitor dentro do texto.</label>
-            <label><input type="radio" name="q3" value="B"> Ignorar o contexto histórico para focar no misticismo.</label>
-            <label><input type="radio" name="q3" value="C"> Extrair o sentido original pretendido pelo autor.</label>
-        </div>
-
-        <div class="questao" data-resp="B">
-            <p>4. (Homilética) Qual o elemento do sermão que serve para "iluminar" a tese através de uma história?</p>
-            <label><input type="radio" name="q4" value="A"> Exórdio</label>
-            <label><input type="radio" name="q4" value="B"> Ilustração</label>
-            <label><input type="radio" name="q4" value="C"> Peroração</label>
-        </div>
-
-        <div class="questao" data-resp="A">
-            <p>5. (História) Quem foi o reformador que fixou as 95 teses em Wittenberg?</p>
-            <label><input type="radio" name="q5" value="A"> Martinho Lutero</label>
-            <label><input type="radio" name="q5" value="B"> João Calvino</label>
-            <label><input type="radio" name="q5" value="C"> Policarpo de Esmirna</label>
-        </div>
-
-        <div class="questao" data-resp="C">
-            <p>6. (Bioética) Qual o fundamento bíblico para a dignidade inalienável da vida humana?</p>
-            <label><input type="radio" name="q6" value="A"> Autonomia progressiva</label>
-            <label><input type="radio" name="q6" value="B"> Evolucionismo Teísta</label>
-            <label><input type="radio" name="q6" value="C"> Imago Dei (Imagem de Deus)</label>
-        </div>
-
-        <div class="questao" data-resp="B">
-            <p>7. (Conflitos) Segundo a 'Engenharia do Perdão', o perdão é:</p>
-            <label><input type="radio" name="q7" value="A"> Um sentimento que surge após o pedido de desculpas.</label>
-            <label><input type="radio" name="q7" value="B"> Uma decisão forense da vontade de não reter a dívida.</label>
-            <label><input type="radio" name="q7" value="C"> Esquecimento total do fato ocorrido.</label>
-        </div>
-
-        <div class="questao" data-resp="A">
-            <p>8. (Heresiologia) Qual seita afirma que Jesus é 'um deus' (criado) e não o Deus Todo-Poderoso?</p>
-            <label><input type="radio" name="q8" value="A"> Testemunhas de Jeová</label>
-            <label><input type="radio" name="q8" value="B"> Adventistas do Sétimo Dia</label>
-            <label><input type="radio" name="q8" value="C"> Congregação Cristã no Brasil</label>
-        </div>
-
-        <div class="questao" data-resp="C">
-            <p>9. (A.T.) Qual aliança bíblica prometeu que um descendente de Davi reinaria para sempre?</p>
-            <label><input type="radio" name="q9" value="A"> Aliança Noética</label>
-            <label><input type="radio" name="q9" value="B"> Aliança Mosaica</label>
-            <label><input type="radio" name="q9" value="C"> Aliança Davídica</label>
-        </div>
-
-        <div class="questao" data-resp="B">
-            <p>10. (Ontologia) O conceito 'Ex-Nihilo' significa que Deus criou o universo:</p>
-            <label><input type="radio" name="q10" value="A"> A partir de uma matéria pré-existente.</label>
-            <label><input type="radio" name="q10" value="B"> A partir do nada, por Sua palavra.</label>
-            <label><input type="radio" name="q10" value="C"> Como uma emanação de Sua própria substância.</label>
-        </div>
+        <div class="questao" data-resp="B"><p>1. (Bibliologia) Qual termo define que a Bíblia é a autoridade final e suficiente?</p><label><input type="radio" name="q1" value="A"> Inerrância</label><label><input type="radio" name="q1" value="B"> Sola Scriptura</label><label><input type="radio" name="q1" value="C"> Inspiração Parcial</label></div>
+        <div class="questao" data-resp="A"><p>2. (Cristologia) A união hipostática de Cristo defende:</p><label><input type="radio" name="q2" value="A"> 100% Homem e 100% Deus em uma só pessoa.</label><label><input type="radio" name="q2" value="B"> Que Ele deixou de ser Deus enquanto estava na Terra.</label><label><input type="radio" name="q2" value="C"> Que Sua natureza humana era apenas uma ilusão.</label></div>
+        <div class="questao" data-resp="C"><p>3. (Hermenêutica) O que busca a Exegese em um texto bíblico?</p><label><input type="radio" name="q3" value="A"> Colocar o pensamento do leitor dentro do texto.</label><label><input type="radio" name="q3" value="B"> Ignorar o contexto histórico para focar no misticismo.</label><label><input type="radio" name="q3" value="C"> Extrair o sentido original pretendido pelo autor.</label></div>
+        <div class="questao" data-resp="B"><p>4. (Homilética) Qual o elemento do sermão que serve para "iluminar" a tese através de uma história?</p><label><input type="radio" name="q4" value="A"> Exórdio</label><label><input type="radio" name="q4" value="B"> Ilustração</label><label><input type="radio" name="q4" value="C"> Peroração</label></div>
+        <div class="questao" data-resp="A"><p>5. (História) Quem foi o reformador que fixou as 95 teses em Wittenberg?</p><label><input type="radio" name="q5" value="A"> Martinho Lutero</label><label><input type="radio" name="q5" value="B"> João Calvino</label><label><input type="radio" name="q5" value="C"> Policarpo de Esmirna</label></div>
+        <div class="questao" data-resp="C"><p>6. (Bioética) Qual o fundamento bíblico para a dignidade inalienável da vida humana?</p><label><input type="radio" name="q6" value="A"> Autonomia progressiva</label><label><input type="radio" name="q6" value="B"> Evolucionismo Teísta</label><label><input type="radio" name="q6" value="C"> Imago Dei (Imagem de Deus)</label></div>
+        <div class="questao" data-resp="B"><p>7. (Conflitos) Segundo a 'Engenharia do Perdão', o perdão é:</p><label><input type="radio" name="q7" value="A"> Um sentimento que surge após o pedido de desculpas.</label><label><input type="radio" name="q7" value="B"> Uma decisão forense da vontade de não reter a dívida.</label><label><input type="radio" name="q7" value="C"> Esquecimento total do fato ocorrido.</label></div>
+        <div class="questao" data-resp="A"><p>8. (Heresiologia) Qual seita afirma que Jesus é 'um deus' (criado) e não o Deus Todo-Poderoso?</p><label><input type="radio" name="q8" value="A"> Testemunhas de Jeová</label><label><input type="radio" name="q8" value="B"> Adventistas do Sétimo Dia</label><label><input type="radio" name="q8" value="C"> Congregação Cristã no Brasil</label></div>
+        <div class="questao" data-resp="C"><p>9. (A.T.) Qual aliança bíblica prometeu que um descendente de Davi reinaria para sempre?</p><label><input type="radio" name="q9" value="A"> Aliança Noética</label><label><input type="radio" name="q9" value="B"> Aliança Mosaica</label><label><input type="radio" name="q9" value="C"> Aliança Davídica</label></div>
+        <div class="questao" data-resp="B"><p>10. (Ontologia) O conceito 'Ex-Nihilo' significa que Deus criou o universo:</p><label><input type="radio" name="q10" value="A"> A partir de uma matéria pré-existente.</label><label><input type="radio" name="q10" value="B"> A partir do nada, por Sua palavra.</label><label><input type="radio" name="q10" value="C"> Como uma emanação de Sua própria substância.</label></div>
 
         <button type="button" id="btn-finalizar" class="btn-acao" onclick="corrigir()">FINALIZAR AVALIAÇÃO</button>
         <button type="button" id="btn-pdf" class="btn-acao" onclick="gerarPDF()">GERAR MEU CERTIFICADO (PDF)</button>
     </form>
 </div>
 
-<!-- Certificado -->
 <div id="certificado-area">
     <div class="cert-inner">
         <h2 style="color:var(--primary); font-size: 35px; font-family: 'Times New Roman';">Escola Teológica AVANCE</h2>
@@ -200,42 +116,24 @@
             alert("APROVADO! Nota: " + acertos + "/10. Clique no botão de PDF para baixar.");
             document.getElementById('btn-finalizar').style.display = 'none';
             document.getElementById('btn-pdf').style.display = 'block';
-            
-            // Preenche os dados
             document.getElementById('cert-nome-txt').innerText = nome.toUpperCase();
             document.getElementById('cert-nome-cpf').innerHTML = "<strong>"+nome+"</strong><br>CPF: "+cpf;
-            
             clearInterval(contagem);
             localStorage.removeItem('tempo_avance');
         } else {
-            alert("REPROVADO. Nota: " + acertos + "/10. Você precisa de 7 acertos. Estude mais!");
-            localStorage.removeItem('tempo_avance');
+            alert("REPROVADO. Nota: " + acertos + "/10. Você precisa de 7 acertos.");
             location.reload();
         }
     }
 
-        function gerarPDF() {
+    function gerarPDF() {
         const element = document.getElementById('certificado-area');
-        
-        // Garante que o elemento está visível no DOM
-        element.style.display = 'block';
-        
-        const opt = { 
-            margin: 0, 
-            filename: 'Certificado_Teologia_Avance.pdf', 
-            image: { type: 'jpeg', quality: 0.98 }, 
-            html2canvas: { 
-                scale: 2,
-                useCORS: true,
-                logging: false
-            }, 
-            jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } 
-        };
-        
-        // Gera o PDF
-        html2pdf().set(opt).from(element).save();
+        element.style.display = 'block'; // Exibe para capturar
+        const opt = { margin: 0, filename: 'Certificado_Teologia_Avance.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } };
+        html2pdf().set(opt).from(element).save().then(() => {
+            element.style.display = 'none'; // Oculta de novo
+        });
     }
-
 </script>
 </body>
 </html>
