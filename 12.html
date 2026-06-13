@@ -32,10 +32,26 @@
         .btn-acao { width: 100%; padding: 18px; border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
         #btn-finalizar { background: var(--secondary); color: white; }
         #btn-pdf { background: var(--primary); color: white; display: none; }
+    function gerarPDF() {
+        const element = document.getElementById('certificado-area');
+        
+        // Exibe o elemento na tela momentaneamente para o html2pdf capturar
+        element.style.display = 'block';
+        
+        const opt = { 
+            margin: 0, 
+            filename: 'Certificado_Teologia_Avance.pdf', 
+            image: { type: 'jpeg', quality: 0.98 }, 
+            html2canvas: { scale: 2 }, 
+            jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } 
+        };
+        
+        // Gera o PDF e oculta o elemento novamente após o download
+        html2pdf().set(opt).from(element).save().then(() => {
+            element.style.display = 'none';
+        });
+    }
 
-        /* Oculto, mas acessível ao script */
-        #certificado-area { display: none; width: 850px; padding: 40px; background: white; border: 20px solid var(--primary); }
-        .cert-inner { border: 5px double var(--gold); padding: 40px; text-align: center; }
 
         @media (min-width: 600px) {
             .header-avaliacao h1 { font-size: 1.8rem; }
@@ -198,24 +214,28 @@
         }
     }
 
-    function gerarPDF() {
+        function gerarPDF() {
         const element = document.getElementById('certificado-area');
-        // Exibe o elemento antes de gerar
+        
+        // Garante que o elemento está visível no DOM
         element.style.display = 'block';
         
         const opt = { 
             margin: 0, 
             filename: 'Certificado_Teologia_Avance.pdf', 
             image: { type: 'jpeg', quality: 0.98 }, 
-            html2canvas: { scale: 2 }, 
+            html2canvas: { 
+                scale: 2,
+                useCORS: true,
+                logging: false
+            }, 
             jsPDF: { unit: 'px', format: [850, 650], orientation: 'landscape' } 
         };
         
-        // Gera o PDF e oculta novamente ao finalizar
-        html2pdf().set(opt).from(element).save().then(() => {
-            element.style.display = 'none';
-        });
+        // Gera o PDF
+        html2pdf().set(opt).from(element).save();
     }
+
 </script>
 </body>
 </html>
