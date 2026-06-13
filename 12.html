@@ -1,83 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação Teológica Final - AVANCE</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <style>
-        :root { --primary: #004e89; --secondary: #800000; --gold: #c5a059; --bg: #f4f7f9; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--bg); padding: 10px; }
-        .container { width: 100%; max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .header-avaliacao { text-align: center; border-bottom: 3px solid var(--secondary); margin-bottom: 20px; padding-bottom: 15px; }
-        .header-avaliacao h1 { color: var(--primary); font-size: 1.4rem; text-transform: uppercase; }
-        .slogan { font-style: italic; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
-        .info-prova { display: flex; flex-direction: column; gap: 5px; background: #eee; padding: 10px; border-radius: 5px; font-size: 0.85rem; text-align: center; margin-bottom: 15px; }
-        #timer { font-size: 1.3rem; font-weight: bold; color: var(--secondary); text-align: center; margin-bottom: 20px; padding: 10px; border: 2px solid var(--secondary); border-radius: 5px; background: #fff; }
-        .form-dados { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
-        input { width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; outline: none; }
-        .questao { margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 8px; background: #fff; border-left: 5px solid var(--primary); }
-        .questao p { font-weight: bold; margin-bottom: 12px; font-size: 1rem; color: #111; line-height: 1.4; }
-        label { display: block; margin-bottom: 8px; padding: 12px; border-radius: 5px; border: 1px solid #ddd; font-size: 0.95rem; cursor: pointer; }
-        .btn-acao { width: 100%; padding: 18px; border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        #btn-finalizar { background: var(--secondary); color: white; }
-        #btn-pdf { background: var(--primary); color: white; display: none; }
-        #certificado-area { display: none; width: 1120px; height: 790px; padding: 40px; background: white; border: 15px solid var(--primary); box-sizing: border-box; }
-        .cert-inner { border: 5px double var(--gold); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação Teológica Final - AVANCE</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+:root { --primary: #004e89; --secondary: #800000; --gold: #c5a059; --bg: #f4f7f9; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background-color: var(--bg); padding: 10px; }
+.container { width: 100%; max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.header-avaliacao { text-align: center; border-bottom: 3px solid var(--secondary); margin-bottom: 20px; padding-bottom: 15px; }
+.header-avaliacao h1 { color: var(--primary); font-size: 1.4rem; text-transform: uppercase; }
+.slogan { font-style: italic; color: var(--primary); font-weight: bold; font-size: 0.9rem; }
+.info-prova { display: flex; flex-direction: column; gap: 5px; background: #eee; padding: 10px; border-radius: 5px; font-size: 0.85rem; text-align: center; margin-bottom: 15px; }
+#timer { font-size: 1.3rem; font-weight: bold; color: var(--secondary); text-align: center; margin-bottom: 20px; padding: 10px; border: 2px solid var(--secondary); border-radius: 5px; background: #fff; }
+.form-dados { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
+input { width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; outline: none; }
+.questao { margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 8px; background: #fff; border-left: 5px solid var(--primary); }
+.questao p { font-weight: bold; margin-bottom: 12px; font-size: 1rem; color: #111; line-height: 1.4; }
+label { display: block; margin-bottom: 8px; padding: 12px; border-radius: 5px; border: 1px solid #ddd; font-size: 0.95rem; cursor: pointer; }
+.btn-acao { width: 100%; padding: 18px; border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+#btn-finalizar { background: var(--secondary); color: white; }
+#btn-pdf { background: var(--primary); color: white; display: none; }
+#certificado-area { display: none; width: 1120px; height: 790px; padding: 40px; background: white; border: 15px solid var(--primary); box-sizing: border-box; }
+.cert-inner { border: 5px double var(--gold); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+</style>
 </head>
 <body>
 
 <div class="container" id="conteudo-principal">
-    <div class="header-avaliacao">
-        <h1>Escola Teológica AVANCE</h1>
-        <div class="slogan">"Ultrapassando limites!"</div>
-    </div>
-    <div id="timer">Iniciando...</div>
-    <div class="form-dados">
-        <input type="text" id="aluno-nome" placeholder="Nome Completo">
-        <input type="text" id="aluno-cpf" placeholder="CPF">
-    </div>
-    <form id="quiz-form">
-        <div class="questao" data-resp="B"><p>1. (Bibliologia) Qual termo define que a Bíblia é a autoridade final?</p><label><input type="radio" name="q1" value="A"> Inerrância</label><label><input type="radio" name="q1" value="B"> Sola Scriptura</label></div>
-        <div class="questao" data-resp="A"><p>2. (Cristologia) A união hipostática de Cristo defende:</p><label><input type="radio" name="q2" value="A"> 100% Homem e 100% Deus.</label><label><input type="radio" name="q2" value="B"> Apenas Deus.</label></div>
-        <div class="questao" data-resp="C"><p>3. (Hermenêutica) O que busca a Exegese?</p><label><input type="radio" name="q3" value="A"> Misticismo.</label><label><input type="radio" name="q3" value="C"> Sentido original.</label></div>
-        <div class="questao" data-resp="B"><p>4. (Homilética) Qual elemento ilumina a tese?</p><label><input type="radio" name="q4" value="A"> Exórdio.</label><label><input type="radio" name="q4" value="B"> Ilustração.</label></div>
-        <div class="questao" data-resp="A"><p>5. (História) Reformador das 95 teses?</p><label><input type="radio" name="q5" value="A"> Martinho Lutero.</label><label><input type="radio" name="q5" value="B"> Calvino.</label></div>
-        <div class="questao" data-resp="C"><p>6. (Bioética) Fundamento da dignidade humana?</p><label><input type="radio" name="q6" value="A"> Autonomia.</label><label><input type="radio" name="q6" value="C"> Imago Dei.</label></div>
-        <div class="questao" data-resp="B"><p>7. (Conflitos) O perdão é:</p><label><input type="radio" name="q7" value="A"> Sentimento.</label><label><input type="radio" name="q7" value="B"> Decisão forense.</label></div>
-        <div class="questao" data-resp="A"><p>8. (Heresiologia) Seita que diz que Jesus é 'um deus'?</p><label><input type="radio" name="q8" value="A"> Testemunhas de Jeová.</label><label><input type="radio" name="q8" value="B"> Adventistas.</label></div>
-        <div class="questao" data-resp="C"><p>9. (A.T.) Qual aliança promete o reino eterno de Davi?</p><label><input type="radio" name="q9" value="A"> Noética.</label><label><input type="radio" name="q9" value="C"> Davídica.</label></div>
-        <div class="questao" data-resp="B"><p>10. (Ontologia) 'Ex-Nihilo' significa?</p><label><input type="radio" name="q10" value="A"> Matéria pré-existente.</label><label><input type="radio" name="q10" value="B"> Do nada.</label></div>
-        <button type="button" id="btn-finalizar" class="btn-acao" onclick="corrigir()">FINALIZAR</button>
-        <button type="button" id="btn-pdf" class="btn-acao" onclick="gerarPDF()">GERAR PDF</button>
-    </form>
+<div class="header-avaliacao">
+<h1>Escola Teológica AVANCE</h1>
+<div class="slogan">"Ultrapassando limites!"</div>
+</div>
+<div id="timer">Carregando...</div>
+<div class="form-dados">
+<input type="text" id="aluno-nome" placeholder="Nome Completo">
+<input type="text" id="aluno-cpf" placeholder="CPF">
+</div>
+<form id="quiz-form">
+<div class="questao" data-resp="B"><p>1. (Bibliologia) Qual termo define que a Bíblia é a autoridade final?</p><label><input type="radio" name="q1" value="A"> Inerrância</label><label><input type="radio" name="q1" value="B"> Sola Scriptura</label></div>
+<div class="questao" data-resp="A"><p>2. (Cristologia) A união hipostática de Cristo defende:</p><label><input type="radio" name="q2" value="A"> 100% Homem e 100% Deus.</label><label><input type="radio" name="q2" value="B"> Apenas Deus.</label></div>
+<div class="questao" data-resp="C"><p>3. (Hermenêutica) O que busca a Exegese?</p><label><input type="radio" name="q3" value="A"> Misticismo.</label><label><input type="radio" name="q3" value="C"> Sentido original.</label></div>
+<div class="questao" data-resp="B"><p>4. (Homilética) Qual elemento ilumina a tese?</p><label><input type="radio" name="q4" value="A"> Exórdio.</label><label><input type="radio" name="q4" value="B"> Ilustração.</label></div>
+<div class="questao" data-resp="A"><p>5. (História) Reformador das 95 teses?</p><label><input type="radio" name="q5" value="A"> Martinho Lutero.</label><label><input type="radio" name="q5" value="B"> Calvino.</label></div>
+<div class="questao" data-resp="C"><p>6. (Bioética) Fundamento da dignidade humana?</p><label><input type="radio" name="q6" value="A"> Autonomia.</label><label><input type="radio" name="q6" value="C"> Imago Dei.</label></div>
+<div class="questao" data-resp="B"><p>7. (Conflitos) O perdão é:</p><label><input type="radio" name="q7" value="A"> Sentimento.</label><label><input type="radio" name="q7" value="B"> Decisão forense.</label></div>
+<div class="questao" data-resp="A"><p>8. (Heresiologia) Seita que diz que Jesus é 'um deus'?</p><label><input type="radio" name="q8" value="A"> Testemunhas de Jeová.</label><label><input type="radio" name="q8" value="B"> Adventistas.</label></div>
+<div class="questao" data-resp="C"><p>9. (A.T.) Qual aliança promete o reino eterno de Davi?</p><label><input type="radio" name="q9" value="A"> Noética.</label><label><input type="radio" name="q9" value="C"> Davídica.</label></div>
+<div class="questao" data-resp="B"><p>10. (Ontologia) 'Ex-Nihilo' significa?</p><label><input type="radio" name="q10" value="A"> Matéria pré-existente.</label><label><input type="radio" name="q10" value="B"> Do nada.</label></div>
+
+<button type="button" id="btn-finalizar" class="btn-acao" onclick="corrigir()">FINALIZAR</button>
+<button type="button" id="btn-pdf" class="btn-acao" onclick="gerarPDF()">GERAR CERTIFICADO</button>
+</form>
 </div>
 
 <div id="certificado-area">
-    <div class="cert-inner">
-        <h2 style="color:var(--primary); font-size: 40px;">Escola Teológica AVANCE</h2>
-        <h1 style="color:var(--secondary); font-size: 60px;">CERTIFICADO</h1>
-        <h2 id="cert-nome-txt" style="text-decoration: underline;">NOME</h2>
-        <p id="data-emissao"></p>
-    </div>
+<div class="cert-inner">
+<h2 style="color:var(--primary); font-size: 40px;">Escola Teológica AVANCE</h2>
+<h1 style="color:var(--secondary); font-size: 60px;">CERTIFICADO</h1>
+<h2 id="cert-nome-txt" style="text-decoration: underline;">NOME</h2>
+<p id="data-emissao"></p>
+</div>
 </div>
 
 <script>
-    function corrigir() {
-        const nome = document.getElementById('aluno-nome').value;
-        if(!nome) { alert("Nome obrigatório"); return; }
-        document.getElementById('btn-finalizar').style.display = 'none';
-        document.getElementById('btn-pdf').style.display = 'block';
-        document.getElementById('cert-nome-txt').innerText = nome.toUpperCase();
-        document.getElementById('data-emissao').innerText = "Data: " + new Date().toLocaleDateString();
-    }
-    function gerarPDF() {
-        const el = document.getElementById('certificado-area');
-        el.style.display = 'block';
-        html2pdf().set({ jsPDF: { orientation: 'landscape', format: [1120, 790] } }).from(el).save().then(() => el.style.display = 'none');
-    }
+let tempo = 1800;
+const cronometro = setInterval(() => {
+tempo--;
+let m = Math.floor(tempo / 60);
+let s = tempo % 60;
+document.getElementById('timer').innerText = TEMPO RESTANTE: ${m}:${s &lt; 10 ? '0'+s : s};
+if(tempo <= 0) { clearInterval(cronometro); alert("Tempo esgotado!"); }
+}, 1000);
+
+function corrigir() {
+const nome = document.getElementById('aluno-nome').value;
+if(!nome) { alert("Nome é obrigatório."); return; }
+document.getElementById('btn-finalizar').style.display = 'none';
+document.getElementById('btn-pdf').style.display = 'block';
+document.getElementById('cert-nome-txt').innerText = nome.toUpperCase();
+document.getElementById('data-emissao').innerText = "Data: " + new Date().toLocaleDateString();
+}
+
+function gerarPDF() {
+const el = document.getElementById('certificado-area');
+el.style.display = 'block';
+html2pdf().set({ jsPDF: { orientation: 'landscape', format: [1120, 790] } }).from(el).save().then(() => el.style.display = 'none');
+}
 </script>
 </body>
 </html>
