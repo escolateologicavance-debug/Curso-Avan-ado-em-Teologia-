@@ -136,33 +136,39 @@
 
     function gerarPDF() {
         const element = document.getElementById('certificado-area');
+        function gerarPDF() {
+        const element = document.getElementById('certificado-area');
         const principal = document.getElementById('conteudo-principal');
         
+        // Força a exibição para captura
         element.style.display = 'block';
         principal.style.display = 'none';
         
-                const opt = { 
-            margin: 10, // Adicionamos uma margem de 10px para evitar o estouro
+        const opt = { 
+            margin: 0, // Margem zero para ocupar toda a folha
             filename: 'Certificado_Teologia_Avance.pdf', 
             image: { type: 'jpeg', quality: 1 }, 
             html2canvas: { 
                 scale: 2,
-                logging: false,
-                windowWidth: 900 // Força a largura para não quebrar
+                useCORS: true,
+                letterRendering: true,
+                allowTaint: true
             }, 
             jsPDF: { 
                 unit: 'px', 
-                format: [850, 680], // Aumentamos ligeiramente a altura do formato para garantir folga
-                orientation: 'landscape' 
+                format: [850, 650], 
+                orientation: 'landscape',
+                // O segredo está aqui: forçar o PDF a não adicionar margens extras
+                putOnlyUsedFonts: true
             } 
         };
-
         
         html2pdf().set(opt).from(element).save().then(() => {
             element.style.display = 'none';
             principal.style.display = 'block';
         });
     }
+
 </script>
 </body>
 </html>
